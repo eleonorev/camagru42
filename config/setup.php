@@ -6,7 +6,8 @@ $users = "CREATE TABLE IF NOT EXISTS users(
       pass text NOT NULL,
       mail text NOT NULL,
       photo text NOT NULL,
-      nblike int); ";
+      nblike int,
+      validation text); ";
 $connection->exec($users);
 
 

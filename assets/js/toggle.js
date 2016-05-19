@@ -22,4 +22,10 @@ open[x].addEventListener("click", function() {
 
 }
 
+document.getElementById("linkforgot").addEventListener("click", function() {
+  var fg = document.getElementById('forgot');
+  fg.classList.toggle("active");
+  console.log('caca');
+});
+
 };

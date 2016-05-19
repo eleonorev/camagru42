@@ -3,11 +3,11 @@
   ini_set("error_reporting", E_ALL);
   ini_set("display_errors", 1);
   ini_set("display_startup_errors", E_ALL);
-  include 'config/database.php';
+  define('BASE_PATH', realpath(dirname(__FILE__)));
+  define("database", BASE_PATH . '/config/database.php');
   include('model/posts.php');
   include('model/users.php');
   include('model/comments.php');
-
 ?>
 
 <!DOCTYPE html>

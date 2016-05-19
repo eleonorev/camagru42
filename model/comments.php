@@ -1,12 +1,16 @@
 <?php
+if (!(defined('database'))) {
+  define("database", '../config/database.php');
+}
 
 if (isset($_POST['commenter'])) {
   session_start();
+
   post_comment();
 }
 
 function get_comments($idpost) {
-  include 'config/database.php';
+  include database;
   $req = $connection->prepare("SELECT * FROM comments WHERE idpost ='".$idpost."';");
   $req->execute();
   $comments = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -14,7 +18,7 @@ function get_comments($idpost) {
 }
 
 function get_nb_comments($idpost) {
-  include 'config/database.php';
+  include database;
   $req = $connection->prepare("SELECT * FROM comments WHERE idpost ='".$idpost."';");
   $req->execute();
   $nbcomments = $req->rowCount();
@@ -28,10 +32,15 @@ function post_comment() {
   if (empty($_POST['content']))
   {	header('Location: ../index.php?e=3');}
   $content = $_POST['content'];
-  include '../config/database.php';
-  $req = "INSERT INTO comments (idpost, idusercible, content, timedate) VALUES (" . $post .", " . $source .", '" . $content . "', NOW());";
-  $connection->exec($req);
-  header('Location: ../index.php#' . $post);
+  include database;
+  $req = $connection->prepare("INSERT INTO comments (idpost, idusercible, content, timedate) VALUES (" . $post .", " . $source .", '" . $content . "', NOW());");
+  $req->execute();
+  $message = "Vous avez un nouveau commentaire sur l'un de vos posts";
+  include 'users.php';
+  $login = get_login($_POST['iduser']);
+  $mail = get_mail_user($login);
+  mail($mail, 'Camagru - Nouveau Commentaire', $message);
+  header('Location: ../index.php#' . $post . "caca=" . $mail);
 }
 
 ?>

@@ -1,4 +1,7 @@
 <?php
+if (!(defined('database'))) {
+  define("database", '../config/database.php');
+}
 
 if (isset($_GET['like'])){
   session_start();
@@ -10,9 +13,14 @@ if (isset($_GET['dlike'])){
   dislike($_GET['dlike']);
 }
 
+if (isset($_GET['supp'])){
+  session_start();
+  supp_post($_GET['supp']);
+}
+
 
 function get_userpost($user) {
-  include 'config/database.php';
+  include database;
   $iduser = get_iduser($user);
   $req = $connection->prepare("SELECT * FROM post WHERE iduser ='".$iduser."';");
   $req->execute();
@@ -22,7 +30,7 @@ function get_userpost($user) {
 
 function get_nb_post($login) {
   $iduser = get_iduser($login);
-  include 'config/database.php';
+  include database;
   $req = $connection->prepare("SELECT * FROM post WHERE iduser ='".$iduser."';");
   $req->execute();
   $nbpost = $req->rowCount();
@@ -30,7 +38,7 @@ function get_nb_post($login) {
 }
 
 function get_iduser($login) {
-  include 'config/database.php';
+  include database;
   $req = $connection->prepare("SELECT id FROM users WHERE login ='".$login."';");
   $req->execute();
   $iduser = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -40,7 +48,7 @@ function get_iduser($login) {
 }
 
 function getlikers_str($post) {
-  include '../config/database.php';
+  include database;
   $req = $connection->prepare("SELECT likers FROM post WHERE id ='".$post."';");
   $req->execute();
   $nblike = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -48,7 +56,7 @@ function getlikers_str($post) {
 }
 
 function getlikers_str2($post) {
-  include 'config/database.php';
+  include database;
   $req = $connection->prepare("SELECT likers FROM post WHERE id ='".$post."';");
   $req->execute();
   $nblike = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -56,7 +64,7 @@ function getlikers_str2($post) {
 }
 
 function getlikers_post($post) {
-  include 'config/database.php';
+  include database;
   $req = $connection->prepare("SELECT likers FROM post WHERE id ='".$post."';");
   $req->execute();
   $nblike = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -73,7 +81,7 @@ function get_nblike($post) {
 }
 
 function getlike_user($login) {
-  include 'config/database.php';
+  include database;
   $req = $connection->prepare("SELECT nblike FROM users WHERE login ='".$login."';");
   $req->execute();
   $nblike = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -85,7 +93,7 @@ function getlike_user($login) {
 function like($idpost) {
   $likers = getlikers_str($idpost);
   $likers = $likers . $_SESSION['login'] . ",";
-  include '../config/database.php';
+  include database;
   $req = "UPDATE post SET likers = '" . $likers . "'WHERE id = " . $idpost . ";";
   $connection->exec($req);
     header('Location: ../index.php#' . $idpost);
@@ -94,16 +102,31 @@ function like($idpost) {
 function dislike($idpost) {
   $likers = getlikers_str($idpost);
   $likers = str_ireplace($_SESSION['login'] . ",", "", $likers);
-  include '../config/database.php';
+  include database;
   $req = "UPDATE post SET likers = '" . $likers . "'WHERE id = " . $idpost . ";";
   $connection->exec($req);
     header('Location: ../index.php#' . $idpost);
 }
 
 function get_toppost() {
-  include 'config/database.php';
+  include database;
   $result = $connection->prepare('SELECT * FROM post;');
   $result->execute();
   $posts = $result->fetchAll(PDO::FETCH_ASSOC);
   return $posts;
+}
+
+function get_post($id) {
+  include database;
+  $result = $connection->prepare('SELECT * FROM post WHERE id = '. $id .';');
+  $result->execute();
+  $post = $result->fetchAll(PDO::FETCH_ASSOC);
+  return $post[0];
+}
+
+function supp_post($idpost) {
+  include database;
+  $req = "DELETE FROM post WHERE id = " . $idpost . ";";
+  $connection->exec($req);
+  header('Location: ../profile.php');
 }

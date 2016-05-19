@@ -36,6 +36,7 @@
         ?>
           <form action="model/comments.php" name="commenter" method="post">
             <input type="hidden" name="idpost" value="<?php echo $post['id'];?>"/>
+            <input type="hidden" name="iduser" value="<?php echo $post['iduser'];?>"/>
             <textarea name="content" placeholder="Reply..."></textarea>
             <button type="submit" class="button" value="Submit" name="commenter"> Submit </button>
           </form>

@@ -1,4 +1,26 @@
 <div class="login-wrap">
+<?php
+
+	if (isset($_GET['r'])) {
+		switch($_GET['r']) {
+			case 2 : echo "<span class='alert error'> Les mots de passe sont différents </span>"; break;
+			case 3 : echo "<span class='alert error'> Votre mot de passe doit contenir au moins 8 caracteres </span>";  break;
+			case 4 : echo "<span class='alert error'> Votre login doit contenir au moins 3 caracteres </span>";  break;
+			case 5 : echo "<span class='alert error'> Faux mail. </span>";  break;
+			case 6 : echo "<span class='alert error'>Login existant. Merci d'en choisir un autre.</span>";  break;
+			case 7 : echo "<span class='alert error'> Vous ne pouvez pas accéder a cette page sans identification </span>";  break;
+			case 12 : echo "<span class='alert success'> Vous avez reçu un mail de confirmation </span>";  break;
+		}
+	}
+	if (isset($_GET['l'])) {
+		switch($_GET['l']) {
+			case 1 : echo "<span class='alert error'> Vous n'avez pas valider votre compte ou votre mot de passe ne correspond pas a ce login.</span>"; break;
+			case 5 : echo "<span class='alert success'> Felicitation, vous avez valider votre compte, vous pouvez vous connectez. </span>";  break;
+
+		}
+	}
+
+?>
 	<div class="login-html">
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Connexion</label>
 		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Inscription</label>
@@ -21,11 +43,11 @@
 				<div class="hr"></div>
 
 				<div class="foot-lnk">
-					<a href="#forgot">Mot de passe oublié ?</a>
-					<div id=#forgot>
+					<span id="linkforgot">Mot de passe oublié ?</span>
+					<div id="forgot">
 						<form action="model/users.php" method="post">
 							<div class="group">
-								<input id="login" name="login" type="text" class="input" placeholder="login">
+								<input id="loginforgot" name="login" type="text" class="input" placeholder="login">
 							</div>
 							<div class="group">
 								<input name="forgot" type="submit" class="button forgot" value="Regenerer">
