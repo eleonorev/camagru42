@@ -61,6 +61,7 @@ images[x].addEventListener("click", function() {
 
 function save() {
     var image = document.querySelector('#img img');
+    var savein = document.querySelector('#photo');
     image.crossOrigin = "Anonymous";
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
@@ -69,6 +70,7 @@ function save() {
     console.log(url);
     var preview = document.querySelector('#preview');
     preview.src = url;
+    savein.value = url;
 };
 
 function imageIsLoaded(e) {

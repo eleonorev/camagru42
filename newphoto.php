@@ -6,10 +6,12 @@
   <video id="video" width="400" height="300" autoplay></video>
   <button id="screenshot" class="button"> Prendre photo </button>
   <button id="delescreen" class="button"> Reprendre</button> </br>
-  <form action="#">
+  <form action="traitement.php" method="post">
     <div class="input-file-container">
+      <input type="hidden" id="photo" name="photo" type="file" value="">
       <input class="input-file" id="my-file" type="file">
       <label tabindex="0" for="my-file" class="input-file-trigger">Select a file...</label>
+      <input type="submit" value="enregister">
     </div>
     <p class="file-return"></p>
   </form>
