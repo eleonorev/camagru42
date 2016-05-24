@@ -25,6 +25,11 @@ if (isset($_POST['forgot'])) {
     header('Location: ../index.php');
   }
 
+  if (isset($_POST['changepass'])) {
+    session_start();
+    changepass();
+  }
+
 
 function get_pp($login) {
   include database;
@@ -97,8 +102,8 @@ $val = uniqid();
 include '../config/database.php';
 $register = $connection->prepare("SELECT * FROM users WHERE login ='" . $login . "';");
 $register->execute();
-$user = $register->fetch();
-if (!(isset($user))) {
+$user = $register->fetchAll(PDO::FETCH_ASSOC);
+if (isset($user[0])) {
    $error = 6;
 }
 
@@ -120,7 +125,39 @@ exit;
 
 function regeneratepwd() {
   $login = $_POST['login'];
+  $val = uniqid();
+  include database;
+  $modify = "UPDATE users SET validation = '" . $val . "'WHERE login = '" . $login . "';";
+  $connection->exec($modify);
+  $mail = get_mail_user($login);
+  $message = " Pour modifiez votre mot de passe sur ce lien : localhost:8080/camagru/modifypass.php?v=" . $val ."&l=" . $login;
+  mail($mail, 'Modification mdp - Camagru', $message);
+  header('Location: ../index.php?r=12');
 }
+
+function changepass() {
+  $login = $_POST['login'];
+  $val = $_POST['val'];
+  $pass1 = $_POST['pass1'];
+  $pass2 = $_POST['pass2'];
+  if (empty($val)) {
+      header('Location: ../index.php?l=1');
+  }
+  if ($pass1 == $pass2) {
+    $passwd = hash("whirlpool", $pass1);
+    include database;
+      $modify = $connection->prepare("UPDATE users SET pass = '" . $passwd . "' WHERE login ='".$login."';");
+    $modify->execute();
+    include database;
+        $req = "UPDATE users SET validation = '' WHERE login = '" . $login . "';";
+      $connection->exec($req);
+    }
+    else {
+      header('Location: ../index.php?l=1');
+    }
+    header('Location: ../index.php?l=5');
+}
+
 
 function login() {
       $login = $_POST['login'];

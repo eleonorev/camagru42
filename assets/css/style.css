@@ -121,6 +121,7 @@ label, input {
   align-items: center;
   justify-content: center;
   transition: all 0.6s ease;
+padding-top: 80px;
 }
 
 .article {
@@ -466,6 +467,11 @@ video {
   position: absolute;
   top: 80px;
 }
+
+video.off {
+    display: none;
+}
+
 canvas {
   display: block;
   position: absolute;
@@ -490,6 +496,16 @@ canvas {
   height: 300px;
 }
 
+#upload {
+  height: 300px;
+  width: 400px;
+  display: block;
+  position: absolute;
+  top: 80px;
+  z-index: 90;
+  overflow: hidden;
+}
+
 
 .button.save {
   display: block;
@@ -502,6 +518,56 @@ button {
   margin: 0 !important;
   margin-top: 500px !important;
 }
+
+.input-file-container {
+  position: absolute;
+  top: 600px;
+  width: 225px;
+}
+.js .input-file-trigger {
+  display: block;
+  padding: 14px 45px;
+  background: #39D2B4;
+  color: #fff;
+  font-size: 1em;
+  transition: all .4s;
+  cursor: pointer;
+}
+.js .input-file {
+  position: absolute;
+  top: 0; left: 0;
+  width: 225px;
+  opacity: 0;
+  padding: 14px 0;
+  cursor: pointer;
+}
+.js .input-file:hover + .input-file-trigger,
+.js .input-file:focus + .input-file-trigger,
+.js .input-file-trigger:hover,
+.js .input-file-trigger:focus {
+  background: #34495E;
+  color: #39D2B4;
+}
+
+.file-return {
+  margin: 0;
+}
+.file-return:not(:empty) {
+  margin: 1em 0;
+}
+.js .file-return {
+  font-style: italic;
+  font-size: .9em;
+  font-weight: bold;
+}
+.js .file-return:not(:empty):before {
+  content: "Selected file: ";
+  font-style: normal;
+  font-weight: normal;
+}
+
+
+
 
 
 

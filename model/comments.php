@@ -32,6 +32,7 @@ function post_comment() {
   if (empty($_POST['content']))
   {	header('Location: ../index.php?e=3');}
   $content = $_POST['content'];
+  $content = htmlentities($content);
   include database;
   $req = $connection->prepare("INSERT INTO comments (idpost, idusercible, content, timedate) VALUES (" . $post .", " . $source .", '" . $content . "', NOW());");
   $req->execute();

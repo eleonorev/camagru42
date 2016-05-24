@@ -5,7 +5,16 @@
   <div id="camera">
   <video id="video" width="400" height="300" autoplay></video>
   <button id="screenshot" class="button"> Prendre photo </button>
-  <button id="delescreen" class="button"> Reprendre</button>
+  <button id="delescreen" class="button"> Reprendre</button> </br>
+  <form action="#">
+    <div class="input-file-container">
+      <input class="input-file" id="my-file" type="file">
+      <label tabindex="0" for="my-file" class="input-file-trigger">Select a file...</label>
+    </div>
+    <p class="file-return"></p>
+  </form>
+  <div id="upload"> <img src=""/></div>
+
 <div id="img"> <img src=""/></div>
   <canvas id="canvas" width="400" height="300"></canvas>
 </div>

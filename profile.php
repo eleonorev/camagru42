@@ -6,6 +6,13 @@ include 'view/header.php';
   header('Location: ../index.php?e=5');
 }
 
+if (isset($_GET['r'])) {
+  switch($_GET['r']) {
+    case 1 : echo "<span class='alert success'> Post supprimer ! </span>"; break;
+    case 2 : echo "<span class='alert error'> Erreur, c'est pas le tien.  </span>";  break;
+  }
+}
+
   $user = $_SESSION['login'];
   ?>
 

@@ -26,6 +26,10 @@ window.addEventListener("DOMContentLoaded", function() {
                         video.play();
                 }, errBack);
         }
+
+        if (document.querySelector('#upload img').src != NULL) {
+            video.pause();
+        }
 }, false);
 
 
@@ -53,17 +57,44 @@ images[x].addEventListener("click", function() {
   console.log(src);
   dest.src = src;
 });
-
 }
 
 function save() {
-  var image = document.querySelector('#img img');
-  image.crossOrigin = "Anonymous";
-  var canvas = document.getElementById("canvas");
-  var context = canvas.getContext("2d");
-  context.drawImage(image, 0,0);
-  var url = canvas.toDataURL();
-  console.log(url);
-  var preview = document.querySelector('#preview');
-  preview.src = url;
+    var image = document.querySelector('#img img');
+    image.crossOrigin = "Anonymous";
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    context.drawImage(image, 0,0);
+    var url = canvas.toDataURL();
+    console.log(url);
+    var preview = document.querySelector('#preview');
+    preview.src = url;
 };
+
+function imageIsLoaded(e) {
+    document.querySelector('#upload img').src = e.target.result;
+};
+
+document.querySelector("html").classList.add('js');
+
+var fileInput  = document.querySelector( ".input-file" ),
+    button     = document.querySelector( ".input-file-trigger" ),
+    the_return = document.querySelector(".file-return");
+
+button.addEventListener( "keydown", function(event) {
+    if (event.keyCode == 13 || event.keyCode == 32) {
+        fileInput.focus();
+    }
+});
+
+button.addEventListener( "click", function(event) {
+    fileInput.focus();
+    return false;
+});
+
+fileInput.addEventListener( "change", function(event) {
+    the_return.innerHTML = this.value;
+    var reader = new FileReader();
+    reader.onload = imageIsLoaded;
+    reader.readAsDataURL(this.files[0]);
+});

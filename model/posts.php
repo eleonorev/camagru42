@@ -124,9 +124,20 @@ function get_post($id) {
   return $post[0];
 }
 
+function get_iduser_post($idpost) {
+  include database;
+  $result = $connection->prepare('SELECT * FROM post WHERE id = '. $idpost .';');
+  $result->execute();
+  $post = $result->fetchAll(PDO::FETCH_ASSOC);
+  return $post[0]['iduser'];
+}
+
 function supp_post($idpost) {
   include database;
-  $req = "DELETE FROM post WHERE id = " . $idpost . ";";
-  $connection->exec($req);
-  header('Location: ../profile.php');
+  if (get_iduser_post($idpost) == $_SESSION['id']) {
+    $req = "DELETE FROM post WHERE id = " . $idpost . ";";
+    $connection->exec($req);
+    header('Location: ../profile.php?r=1');
+  }
+  header('Location: ../profile.php?r=2');
 }
