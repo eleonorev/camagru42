@@ -13,7 +13,7 @@ $connection->exec($users);
 
 $post = "CREATE TABLE IF NOT EXISTS post (
       id int(11) AUTO_INCREMENT PRIMARY KEY,
-      link text,
+      link longtext,
       content text,
       tags text,
       timedate datetime,

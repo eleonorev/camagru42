@@ -25,12 +25,21 @@ function get_nb_comments($idpost) {
   return $nbcomments;
 }
 
+function get_user_nb_comments($iduser) {
+  include database;
+  $req = $connection->prepare("SELECT * FROM comments WHERE idusercible ='".$iduser."';");
+  $req->execute();
+  $nbcomments = $req->rowCount();
+  return $nbcomments;
+}
+
 
 function post_comment() {
   $post = $_POST['idpost'];
   $source = $_SESSION['id'];
-  if (empty($_POST['content']))
-  {	header('Location: ../index.php?e=3');}
+  if (strlen($_POST['content']) < 2)
+  {	header('Location: ../index.php?r=2');
+  exit();}
   $content = $_POST['content'];
   $content = htmlentities($content);
   include database;
@@ -41,7 +50,7 @@ function post_comment() {
   $login = get_login($_POST['iduser']);
   $mail = get_mail_user($login);
   mail($mail, 'Camagru - Nouveau Commentaire', $message);
-  header('Location: ../index.php#' . $post . "caca=" . $mail);
+  header('Location: ../index.php?r=3#' . $post);
 }
 
 ?>

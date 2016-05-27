@@ -12,14 +12,22 @@ if (isset($_GET['v']) && isset($_GET['l']))
       $blop = $motdepasse->fetchAll(PDO::FETCH_ASSOC);
       $blop = $blop[0];
       $result = $blop['validation'];
-    if (strcmp($result, $val) != 0) {
-        exit();
-    }
+}
+
+else {
+  $val = 'non';
+  $result = 'lol';
 }
 
 ?>
 
 <div class="container active">
+  <?php
+  if (strcmp($result, $val) != 0) {
+      echo "<span class='alert error'>Me prend pas pour un con </span>";
+      exit();
+  }
+   ?>
 <form action="model/users.php" method="post">
     <input type="hidden" id="login" name="login" value="<?php echo $login; ?>" class="input">
     <input type="hidden" id="login" name="val" value="<?php echo $val; ?>" class="input">

@@ -131,8 +131,9 @@ function regeneratepwd() {
   $connection->exec($modify);
   $mail = get_mail_user($login);
   $message = " Pour modifiez votre mot de passe sur ce lien : localhost:8080/camagru/modifypass.php?v=" . $val ."&l=" . $login;
-  mail($mail, 'Modification mdp - Camagru', $message);
-  header('Location: ../index.php?r=12');
+  if (isset($mail) && mail($mail, 'Modification mdp - Camagru', $message)) {
+  header('Location: ../index.php?r=12'); }
+  else {   header('Location: ../index.php?r=13'); }
 }
 
 function changepass() {

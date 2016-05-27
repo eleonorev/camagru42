@@ -1,5 +1,14 @@
 window.onload = function(){
 
+  if (window.matchMedia("(max-width: 700px)").matches) {
+    var tg = document.getElementById("toggle");
+    var nav = document.getElementById("navigation");
+    var content = document.querySelector('.container');
+    tg.classList.toggle("on");
+    content.classList.toggle("active");
+    nav.classList.toggle("active");
+  }
+
 document.getElementById("toggle").addEventListener("click", function() {
   var tg = document.getElementById("toggle");
   var nav = document.getElementById("navigation");
@@ -21,11 +30,5 @@ open[x].addEventListener("click", function() {
 });
 
 }
-
-document.getElementById("linkforgot").addEventListener("click", function() {
-  var fg = document.getElementById('forgot');
-  fg.classList.toggle("active");
-  console.log('caca');
-});
 
 };

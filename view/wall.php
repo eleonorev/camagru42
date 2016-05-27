@@ -3,23 +3,27 @@
 
 <div id="wall">
     <?php
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+    }
+    else {$page = 1;}
 
-    $posts = get_toppost();
-    foreach ($posts as $post) {
-      $login = get_login($post['iduser']);
-      echo "<div class='post' id=" . $post['id'] . ">";
-      $date2 = $post['timedate'];
+    $posts = get_toppost($page);
+    for($i = 2; $i >= 0; $i--) {
+      $login = get_login($posts[$i]['iduser']);
+      echo "<div class='post' id=" . $posts[$i]['id'] . ">";
+      $date2 = $posts[$i]['timedate'];
       $date2 = date('Y-m-d', strtotime($date2));
       echo "<span class='heure'>" . $date2 . "</span>";
-      echo "<span class='texte'>" . $post['content'] . "</span>";
-      echo "<img src='". $post['link'] ."'/>";
+      echo "<span class='texte'>" . $posts[$i]['content'] . "</span>";
+      echo "<img src='". $posts[$i]['link'] ."'/>";
       echo "<img class='pp' src='upload/profilpictures/" . get_pp($login) . "'/>";
-      echo "<a href='profile?login=" . $login . "'><span class='login'>" . $login . "</span></a>";
+      echo "<span class='login'>" . $login . "</span>";
 
-      //echo "<span class='heure'> report content(" . $post['report'] .") </span>";
-      echo "<span class='like'>" . get_nblike($post['id']) . " likes - <span class='opencomments'>";
-      echo get_nb_comments($post['id']) . " comments </span></span>";
-      $comments = get_comments($post['id']);
+      //echo "<span class='heure'> report content(" . $posts[$i]['report'] .") </span>";
+      echo "<span class='like'>" . get_nblike($posts[$i]['id']) . " likes - <span class='opencomments'>";
+      echo get_nb_comments($posts[$i]['id']) . " comments </span></span>";
+      $comments = get_comments($posts[$i]['id']);
       echo "<div class='comments active'>";
         foreach ($comments as $com) {
           $date = $com['timedate'];
@@ -27,7 +31,7 @@
           echo "<div class='com'>";
           $user = get_login($com['idusercible']);
           echo "<div class='userinfos'><img class='pp' src='upload/profilpictures/" . get_pp($user) . "'/>";
-          echo "<a href='profile?login=" . $login . "'><span class='login'> Par " . $user . " le " . $date ."</span></a> </div>";
+          echo "<span class='login'> Par " . $user . " le " . $date ."</span> </div>";
           echo "<div class='texte'>" . $com['content'] . "</div>";
           echo "</div>";
 
@@ -35,17 +39,17 @@
         if (isset($_SESSION['login'])) {
         ?>
           <form action="model/comments.php" name="commenter" method="post">
-            <input type="hidden" name="idpost" value="<?php echo $post['id'];?>"/>
-            <input type="hidden" name="iduser" value="<?php echo $post['iduser'];?>"/>
+            <input type="hidden" name="idpost" value="<?php echo $posts[$i]['id'];?>"/>
+            <input type="hidden" name="iduser" value="<?php echo $posts[$i]['iduser'];?>"/>
             <textarea name="content" placeholder="Reply..."></textarea>
             <button type="submit" class="button" value="Submit" name="commenter"> Submit </button>
           </form>
-           <?php   $likers = getlikers_str2($post['id']);
+           <?php   $likers = getlikers_str2($posts[$i]['id']);
              if (!(strstr($likers, $_SESSION['login']))) {
-          echo "<a href='model/posts.php?like=". $post['id'] . "'><div class='button like'> Like ? </div></a>";
+          echo "<a href='model/posts.php?like=". $posts[$i]['id'] . "'><div class='button like'> Like ? </div></a>";
         }
         else {
-          echo "<a href='model/posts.php?dlike=". $post['id'] . "'><div class='button like'> Vous aimez ça ! </div></a>";
+          echo "<a href='model/posts.php?dlike=". $posts[$i]['id'] . "'><div class='button like'> Vous aimez ça ! </div></a>";
         }
       }
       else {
@@ -54,9 +58,21 @@
       echo "</div></div>";
     }
 
+    $prec = $page - 1;
+    $suiv = $page + 1;
+    $maxpage = nb_post() / 3;
+    echo "<span style='text-align: center; margin-bottom: 30px; width: 100%; height: 50px; display: block;'> ";
+    if ($prec > 0) {
+    echo "<a href='index.php?page=" . $prec . "'> Precedent </a>"; }
+    echo "<span style='color: white;'> Page " . $page . "</span>";
+    if ($suiv < $maxpage) {
+    echo "<a href='index.php?page=" . $suiv . "'> Suivant </a>"; }
+    echo "</span>";
     ?>
+  </br>
 
 </div>
+
 
 
 </div>

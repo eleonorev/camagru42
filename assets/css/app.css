@@ -1,0 +1,234 @@
+#app {
+  display: inline-block;
+  width: 80vw;
+  margin: auto;
+  min-height: 100vh;
+}
+
+
+#camera {
+  display: block;
+  width: 400px;
+  height: 600px;
+  float: left;
+  margin-top: 80px;
+  margin-right: 20px;
+}
+
+ #preview_gallery {
+   float: left;
+   width: 200px;
+   height: 600px;
+   background-color: rgba(255, 255,255,0.4);
+   overflow-y: scroll;
+ }
+
+#preview_gallery  img {
+  width: 160px;
+  margin: 10px;
+}
+
+#preview_gallery span.delete {
+  background-color: #fff;
+  padding: 3px 10px;
+  border-radius: 40px;
+  font-weight: 300;
+  top: -40px;
+  font-size: 1.2em;
+  opacity: 0.6;
+  transition: opacity 0.5s ease;
+}
+
+#preview_gallery span.delete:hover {
+  opacity: 1;
+}
+
+
+video {
+  display: block;
+  position: relative;
+}
+
+video.off {
+    display: none;
+}
+
+canvas {
+  display: block;
+  position: absolute;
+  top: 160px;
+}
+
+#img {
+  height: 300px;
+  width: 400px;
+  display: block;
+  position: absolute;
+  top: 160px;
+  z-index: 100;
+}
+
+#preview {
+  height: 300px;
+  width: 400px;
+  display: block;
+  position: absolute;
+  top: 160px;
+  z-index: 100;
+}
+
+
+#img img {
+  height: 300px;
+}
+
+#upload {
+  height: 300px;
+  width: 400px;
+  display: block;
+  position: absolute;
+  top: 160px;
+  z-index: 90;
+  overflow: hidden;
+}
+
+#mask {
+  background-color: rgba(255,255,255,0.3);
+  width: 400px;
+  margin-top: 160px;
+  display: inline-block;
+  position: absolute;
+  top: 300px;
+  left: 0px;
+  margin-right: 20px;
+  overflow-x: scroll;
+}
+
+
+#mask img {
+  height: 80px;
+}
+
+
+.button.save {
+  display: block;
+  position: relative;
+  top: 600px;
+}
+button {
+  display: block;
+  float: left;
+  margin: 0 !important;
+  margin-top: 500px !important;
+}
+
+.input-file-container {
+  position: absolute;
+  top: 600px;
+  width: 225px;
+}
+.js .input-file-trigger {
+  display: block;
+  padding: 14px 45px;
+  background: #39D2B4;
+  color: #fff;
+  font-size: 1em;
+  transition: all .4s;
+  cursor: pointer;
+}
+.js .input-file {
+  position: absolute;
+  top: 0; left: 0;
+  width: 225px;
+  opacity: 0;
+  padding: 14px 0;
+  cursor: pointer;
+}
+.js .input-file:hover + .input-file-trigger,
+.js .input-file:focus + .input-file-trigger,
+.js .input-file-trigger:hover,
+.js .input-file-trigger:focus {
+  background: #34495E;
+  color: #39D2B4;
+}
+
+.file-return {
+  margin: 0;
+}
+.file-return:not(:empty) {
+  margin: 1em 0;
+}
+.js .file-return {
+  font-style: italic;
+  font-size: .9em;
+  font-weight: bold;
+}
+.js .file-return:not(:empty):before {
+  content: "Selected file: ";
+  font-style: normal;
+  font-weight: normal;
+}
+
+.button {
+  display: block;
+}
+
+.button.disable{
+  display: none;
+}
+
+@media screen and (max-width: 700px) {
+
+  #profile {
+    width: 100vw;
+    margin: auto;
+    text-align: center;
+  }
+  #navigation {
+    padding-top: 50px;
+    left: -100vw;
+    width: 100vw;
+    background-color: rgba(128,124,217, 1);
+  }
+
+  #navigation .active {
+    display: none;
+  }
+
+#toggle.on {
+  left: 85vw;
+}
+
+  #toggle {
+    width: 28px;
+    height: 30px;
+    margin: 10px auto;
+    display: block;
+    position: fixed;
+    left: 85vw;
+    top: 0px;
+    z-index: 40 !important;
+    transition: left 0.4s ease;
+    cursor: pointer;
+  }
+
+  #wall {
+    width: 90vw;
+  }
+
+  #userprofile {
+    width: 80vw;
+}
+
+  span.logo {
+    margin-right: 200px;
+  }
+
+  #app {
+    width: 100vw;
+    margin-left: 30px;
+  }
+  video {
+    left: 100px;
+  }
+}

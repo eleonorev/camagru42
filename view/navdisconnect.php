@@ -10,6 +10,8 @@
 			case 6 : echo "<span class='alert error'>Login existant. Merci d'en choisir un autre.</span>";  break;
 			case 7 : echo "<span class='alert error'> Vous ne pouvez pas accéder a cette page sans identification </span>";  break;
 			case 12 : echo "<span class='alert success'> Vous avez reçu un mail de confirmation </span>";  break;
+			case 13 : echo "<span class='alert error'>Me prend pas pour un con </span>";  break;
+
 		}
 	}
 	if (isset($_GET['l'])) {
@@ -88,4 +90,9 @@
 			</div>
 		</div>
 	</div>
+	<script>
+	document.getElementById("linkforgot").addEventListener("click", function() {
+	  var fg = document.getElementById('forgot');
+	  fg.classList.toggle("active");
+	}); </script>
 </div>

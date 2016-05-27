@@ -17,6 +17,7 @@
   <title>Camagru</title>
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <link rel="stylesheet" type="text/css" href="assets/css/nav.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/app.css">
   <script src="assets/js/toggle.js"></script>
 </head>
 <body>
@@ -24,7 +25,6 @@
       <ul class="menu">
           <div class="menuright">
             <span class="logo">Camagru </span>
-            <span class="logo slogan">cam à grue</span>
                   </div>
 
                 </ul>

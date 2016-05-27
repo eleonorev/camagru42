@@ -20,7 +20,7 @@ if (isset($_GET['v']) && isset($_GET['l']))
       header('Location: ../index.php?l=5');
   }
   else {
-    header('Location: ../index.php');
+    header('Location: ../index.php?r=13');
   }
 
 }

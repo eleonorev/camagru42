@@ -22,11 +22,20 @@ if (isset($_GET['supp'])){
 function get_userpost($user) {
   include database;
   $iduser = get_iduser($user);
-  $req = $connection->prepare("SELECT * FROM post WHERE iduser ='".$iduser."';");
+  $req = $connection->prepare("SELECT * FROM post WHERE iduser ='".$iduser."' ORDER BY timedate desc;");
   $req->execute();
   $posts = $req->fetchAll(PDO::FETCH_ASSOC);
   return $posts;
 }
+
+function nb_post() {
+  include database;
+  $req = $connection->prepare("SELECT * FROM post");
+  $req->execute();
+  $nbpost = $req->rowCount();
+  return $nbpost;
+}
+
 
 function get_nb_post($login) {
   $iduser = get_iduser($login);
@@ -108,9 +117,12 @@ function dislike($idpost) {
     header('Location: ../index.php#' . $idpost);
 }
 
-function get_toppost() {
+function get_toppost($page) {
+  $ttpost = nb_post();
+  $nbpage = $ttpost / 3;
+  $deb = $ttpost - ($page * 3);
   include database;
-  $result = $connection->prepare('SELECT * FROM post;');
+  $result = $connection->prepare('SELECT * FROM post LIMIT ' . $deb .', 3 ;');
   $result->execute();
   $posts = $result->fetchAll(PDO::FETCH_ASSOC);
   return $posts;
@@ -118,7 +130,7 @@ function get_toppost() {
 
 function get_post($id) {
   include database;
-  $result = $connection->prepare('SELECT * FROM post WHERE id = '. $id .';');
+  $result = $connection->prepare('SELECT * FROM post WHERE id = '. $id .' ORDER BY timedate desc;');
   $result->execute();
   $post = $result->fetchAll(PDO::FETCH_ASSOC);
   return $post[0];
@@ -126,7 +138,7 @@ function get_post($id) {
 
 function get_iduser_post($idpost) {
   include database;
-  $result = $connection->prepare('SELECT * FROM post WHERE id = '. $idpost .';');
+  $result = $connection->prepare('SELECT * FROM post WHERE id = '. $idpost .' ORDER BY timedate desc;');
   $result->execute();
   $post = $result->fetchAll(PDO::FETCH_ASSOC);
   return $post[0]['iduser'];
@@ -139,5 +151,6 @@ function supp_post($idpost) {
     $connection->exec($req);
     header('Location: ../profile.php?r=1');
   }
-  header('Location: ../profile.php?r=2');
+  else {
+  header('Location: ../profile.php?r=2'); }
 }
