@@ -1,11 +1,10 @@
 <?php
-include 'view/header.php';
-
- if (!(isset($_SESSION['login'])))
+session_start();
+if (!(isset($_SESSION['login'])))
 {
-  header('Location: ../index.php?e=5');
+  header('Location: index.php?e=5');
 }
-
+include 'view/header.php';
 
   $user = $_SESSION['login'];
   ?>

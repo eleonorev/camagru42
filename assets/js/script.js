@@ -38,8 +38,8 @@ document.getElementById("screenshot").addEventListener("click", function() {
   var dataURL = canvas.toDataURL();
   savein.value = dataURL;
   document.querySelector("#screenshot").classList.add("disable");
-document.querySelector("#delescreen").classList.remove("disable");
-document.querySelector("#saveimg").classList.remove("disable");
+  document.querySelector("#delescreen").classList.remove("disable");
+  document.querySelector("#saveimg").classList.remove("disable");
 
 });
 
@@ -72,16 +72,21 @@ images[x].addEventListener("click", function() {
 });
 }
 
+
 function imageIsLoaded(e) {
     var context = document.getElementById("canvas");
     var savein = document.querySelector('#photo');
-
     context = canvas.getContext("2d");
-  var upload = document.querySelector('#upload img')
-  upload.src = e.target.result;
-    context.drawImage(upload, 0,0);
+    var upload = document.querySelector('#upload img')
+    upload.src = e.target.result;
+
+       context.drawImage(upload, 0,0);
+
+
     var url2 = canvas.toDataURL();
     savein.value = url2;
+    document.querySelector("#screenshot").classList.add("disable");
+    document.querySelector("#saveimg").classList.remove("disable");
 };
 
 document.querySelector("html").classList.add('js');

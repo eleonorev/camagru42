@@ -3,10 +3,12 @@
 
 <div id="wall">
     <?php
+    $page = 1;
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
     }
-    else {$page = 1;}
+    $maxpage = nb_post() / 3;
+
 
     $posts = get_toppost($page);
     for($i = 2; $i >= 0; $i--) {
@@ -60,7 +62,6 @@
 
     $prec = $page - 1;
     $suiv = $page + 1;
-    $maxpage = nb_post() / 3;
     echo "<span style='text-align: center; margin-bottom: 30px; width: 100%; height: 50px; display: block;'> ";
     if ($prec > 0) {
     echo "<a href='index.php?page=" . $prec . "'> Precedent </a>"; }

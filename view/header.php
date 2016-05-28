@@ -1,8 +1,5 @@
 <?php
   session_start();
-  ini_set("error_reporting", E_ALL);
-  ini_set("display_errors", 1);
-  ini_set("display_startup_errors", E_ALL);
   define('BASE_PATH', realpath(dirname(__FILE__)));
   define("database", BASE_PATH . '/../config/database.php');
   include('model/posts.php');
@@ -15,9 +12,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Camagru</title>
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/nav.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/app.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" media="screen" type="text/css" href="assets/css/style.css">
+  <link rel="stylesheet" media="screen" type="text/css" href="assets/css/nav.css">
+  <link rel="stylesheet" media="screen" type="text/css" href="assets/css/app.css">
   <script src="assets/js/toggle.js"></script>
 </head>
 <body>

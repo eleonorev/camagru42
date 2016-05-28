@@ -213,7 +213,8 @@ transition: opacity 0.3s ease;
 }
 
 #toggle.on {
-    left: 31vw;
+    left: 33vw;
+    display: none;
 }
 
 #toggle div {

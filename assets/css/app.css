@@ -99,7 +99,6 @@ canvas {
   display: inline-block;
   position: absolute;
   top: 300px;
-  left: 0px;
   margin-right: 20px;
   overflow-x: scroll;
 }
@@ -107,6 +106,24 @@ canvas {
 
 #mask img {
   height: 80px;
+}
+
+#screenshot, #delescreen, #delephoto {
+  position: absolute;
+  left: 220px;
+  top: 600px;
+  height: 45px;
+  border: none;
+  width: 180px;
+}
+
+#saveimg {
+  position: absolute;
+  left: 120px;
+  top: 50px;
+  height: 45px;
+  border: none;
+  width: 180px;
 }
 
 
@@ -119,7 +136,6 @@ button {
   display: block;
   float: left;
   margin: 0 !important;
-  margin-top: 500px !important;
 }
 
 .input-file-container {
@@ -177,7 +193,7 @@ button {
   display: none;
 }
 
-@media screen and (max-width: 700px) {
+@media (max-width: 699px) {
 
   #profile {
     width: 100vw;
@@ -191,13 +207,28 @@ button {
     background-color: rgba(128,124,217, 1);
   }
 
+  .container {
+    margin-left: 0px !important;
+    display: block;
+  }
+
   #navigation .active {
     display: none;
   }
 
-#toggle.on {
-  left: 85vw;
-}
+  #toggle.on {
+    left: 85vw;
+  }
+
+  #userprofile {
+    width: 100vw;
+    margin: auto;
+    text-align: center;
+  }
+
+  #userprofile .pp {
+    height: 140px;
+  }
 
   #toggle {
     width: 28px;
@@ -220,6 +251,11 @@ button {
     width: 80vw;
 }
 
+  #wall .post.user {
+    width: 90vw;
+    max-width: 400px;
+  }
+
   span.logo {
     margin-right: 200px;
   }
@@ -228,7 +264,61 @@ button {
     width: 100vw;
     margin-left: 30px;
   }
-  video {
-    left: 100px;
+
+
+    #camera {
+      margin-top: 20px;
+    }
+
+
+    video {
+      left: -30px;
+    }
+
+    #mask {
+      top: 250px;
+      left: 0px;
+    }
+
+#preview_gallery {
+  display: block;
+  width: 380px;
+}
+
+#preview_gallery .post {
+  float: left;
+
+  width: 160px;
+}
+
+#preview_gallery .post img {
+  width: 150px;
+}
+
+        canvas {
+          left: 0px;
+          top: 100px;
+        }
+
+      canvas#img {
+        top: 100px;
+        left: -5px;
+      }
+
+#screenshot, #delescreen {
+  top: 520px;
+}
+
+  .input-file-container {
+    position: absolute;
+    top: 520px;
+    left: 5px;
+    width: 240px;
+    height: 70px;
   }
+
+  #toggle.on {
+    display: block;
+  }
+
 }

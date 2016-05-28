@@ -63,9 +63,9 @@ body {
   float: left;
   position: fixed;
   width: 30vw;
-  min-width: 350px;
+   min-width: 250px;
   height: 100vh;
-  left: -30vw;
+  left: -100vw;
   top: 0;
   z-index: 10;
   background-color: rgba(128,124,217, 0.7);
@@ -111,17 +111,16 @@ label, input {
 
 .container.active {
   display: block;
-      position: relative;
-      width: 60vw;
-      margin-left: 35vw !important;
-
+  position: relative;
+  width: 60vw;
+  margin-left: 35vw !important;
 }
 
 .container {
   display: flex;
-  justify-content: center;
   transition: all 0.6s ease;
-padding-top: 80px;
+  padding-top: 80px;
+  margin-left: 20vw;
 }
 
 .article {

@@ -13,16 +13,18 @@
       <img class="choose1" src="upload/images/hamburger.png">
       <img class="choose1" src="upload/images/summerbreak.png">
       <img class="choose1" src="upload/images/particule.png">
-      <img class="choose1" src="upload/images/minion.png">
+      <img class="choose1" src="upload/images/monster.png">
 
    </div>
-   <button id="screenshot" class="button disable"> Prendre photo </button>
-  <button id="delescreen" class="button disable"> Reprendre</button> </br>
+
+
+
 
   <form action="traitement.php" method="post">
-    <div class="input-file-container">
+
       <input type="hidden" id="photo" name="photo" value="">
       <input type="hidden" id="maskdata" name="maskdata" value="">
+  <div class="input-file-container">
       <input class="input-file" id="my-file" type="file">
 
       <label tabindex="0" for="my-file" class="input-file-trigger">Choose photo...</label>
@@ -30,6 +32,8 @@
     </div>
     <p class="file-return"></p>
   </form>
+  <button id="screenshot" class="button disable"> Prendre photo </button>
+  <button id="delescreen" class="button disable"> Reprendre</button> </br>
   <div id="upload"> <img src=""/></div>
 
 

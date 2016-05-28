@@ -41,7 +41,7 @@ function post_comment() {
   {	header('Location: ../index.php?r=2');
   exit();}
   $content = $_POST['content'];
-  $content = htmlentities($content);
+  $content = htmlspecialchars($content, ENT_QUOTES);
   include database;
   $req = $connection->prepare("INSERT INTO comments (idpost, idusercible, content, timedate) VALUES (" . $post .", " . $source .", '" . $content . "', NOW());");
   $req->execute();
@@ -50,7 +50,7 @@ function post_comment() {
   $login = get_login($_POST['iduser']);
   $mail = get_mail_user($login);
   mail($mail, 'Camagru - Nouveau Commentaire', $message);
-  header('Location: ../index.php?r=3#' . $post);
+  header('Location: ../post.php?p=' . $post);
 }
 
 ?>

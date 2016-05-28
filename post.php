@@ -56,6 +56,9 @@ echo "<div class='comments active'>";
 else {
   echo "<p style='text-align:center;color:rgba(0,0,0,0.2);font-style:italic;font-size:0.8em;'> Connectez-vous pour commenter ou liker. </p>";
 }
-echo "</div>";
 
-include 'view/footer.php';?>
+echo "</div>";
+echo "</div>";
+echo "</div>";
+echo "</div>";
+include ('view/footer.php');?>
